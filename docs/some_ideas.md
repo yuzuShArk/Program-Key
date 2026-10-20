@@ -29,3 +29,27 @@ My goal for the first phase of the project:
 
 - explore Raspberry Pi Pico
 - test if the non mechanical key idea really works
+
+## Dev log
+
+### 2026/10/20
+
+Today, I made quite some progress. Wrote the one header for key-mapping and one
+for key event. Also, good news is that Pico MCU arrived. Thank god or else I'm
+getting so bored.  
+  
+- Problems and Solutions:  
+If I don't use the key event header to manage event, the return value from the
+capacitance sensor will only have to value of "True" or "False",
+like shown below:  
+
+```text
+return value:
+false -> true -> true -> true -> false
+
+but what the keyboard needs:
+no event -> KeyDown -> no event -> no event -> KeyUp
+```
+
+So, hopefully the key event method will solve the problem. I haven't tested
+it yet though...
