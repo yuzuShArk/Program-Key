@@ -9,6 +9,13 @@
 - how to use git
 - using Linux terminal
 
+## Specs about the Keyboard
+
+- input method: touch to make input
+- keyboard layout: QWERTY
+- MCU: Raspberry Pi Pico 2 (ESP32 or other MCUs are still in consideration
+- output method: USB HID
+
 ## Initial Idea
 
 For making prototype of the keyboard, I plan to use Raspberry Pi
