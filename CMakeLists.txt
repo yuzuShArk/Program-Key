@@ -9,6 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(program_key
     src/main.cpp
     src/keymap.cpp
+    src/keyboard.cpp
 )
 
 target_include_directories(program_key

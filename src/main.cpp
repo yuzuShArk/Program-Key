@@ -1,20 +1,25 @@
-#include "keymap.hpp"
+#include "keyboard.hpp"
 
-#include <cstdint>
 #include <iostream>
 
 int main() {
-  for (std::uint8_t electrode = 0; electrode < 8; ++electrode) {
-    const auto key = get_keycode(electrode);
+  Keyboard keyboard;
 
-    std::cout << "Electrode " << static_cast<int>(electrode) << ": ";
-
-    if (key.has_value()) {
-      std::cout << "Mapped\n";
-    } else {
-      std::cout << "Unmapped\n";
+  const auto print_events = [](const auto &events) {
+    for (const auto &event : events) {
+      if (event.type == KeyEventType::KeyDown) {
+        std::cout << "KeyDown!" << std::endl;
+      } else {
+        std::cout << "KeyUp" << std::endl;
+      }
     }
-  }
+  };
+
+  print_events(keyboard.update(0, false)); // let go
+  print_events(keyboard.update(0, true));  // touched
+  print_events(keyboard.update(0, true));  // keep touching
+  print_events(keyboard.update(0, true));  // keep touching
+  print_events(keyboard.update(0, false)); // let go
 
   return 0;
 }

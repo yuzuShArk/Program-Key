@@ -52,4 +52,13 @@ no event -> KeyDown -> no event -> no event -> KeyUp
 ```
 
 So, hopefully the key event method will solve the problem. I haven't tested
-it yet though...
+it yet though...  
+  
+About update():  
+Upon calling `update(electrode_id, touched)` , the program needs to do the
+following steps:  
+
+1. check keymap (if this electrode has corresponding key linked to it)
+2. read old key state (KeyUp or KeyDown)
+3. compare old state and new state (change if new state and old state is different)
+4. update key state

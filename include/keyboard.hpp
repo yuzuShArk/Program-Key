@@ -3,6 +3,7 @@
 
 #include "keymap.hpp"
 
+#include <array>
 #include <cstdint>
 #include <vector>
 
@@ -20,7 +21,7 @@ public:
                                               // are pressed at different times
 
 private:
-  // TODO
+  std::array<bool, 256> electrode_states{};
 };
 
 #endif
