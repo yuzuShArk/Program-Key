@@ -16,9 +16,7 @@ struct KeyEvent {
 
 class Keyboard {
 public:
-  std::vector<KeyEvent> update(std::uint8_t electrode_id,
-                               bool touched); // use vector to query keys that
-                                              // are pressed at different times
+  std::vector<KeyEvent> update(const std::array<bool, 256> &current_states);
 
 private:
   std::array<bool, 256> electrode_states{};
