@@ -12,16 +12,16 @@ endif()
 file(MAKE_DIRECTORY
   "/home/riddlejoker/Program-Key/firmware/build/_deps/picotool-build"
   "/home/riddlejoker/Program-Key/firmware/build/_deps"
-  "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/tmp"
-  "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp"
-  "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/src"
-  "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp"
+  "/home/riddlejoker/Program-Key/firmware/build/picotool/tmp"
+  "/home/riddlejoker/Program-Key/firmware/build/picotool/src/picotoolBuild-stamp"
+  "/home/riddlejoker/Program-Key/firmware/build/picotool/src"
+  "/home/riddlejoker/Program-Key/firmware/build/picotool/src/picotoolBuild-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/riddlejoker/Program-Key/firmware/build/picotool/src/picotoolBuild-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/riddlejoker/Program-Key/firmware/build/pico-sdk/src/rp2350/boot_stage2/picotool/src/picotoolBuild-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/riddlejoker/Program-Key/firmware/build/picotool/src/picotoolBuild-stamp${cfgdir}") # cfgdir has leading slash
 endif()
