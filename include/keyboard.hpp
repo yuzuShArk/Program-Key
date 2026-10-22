@@ -10,16 +10,16 @@
 enum class KeyEventType { KeyDown, KeyUp };
 
 struct KeyEvent {
-  KeyEventType type;
-  KeyCode key;
+    KeyEventType type;
+    KeyCode key;
 };
 
 class Keyboard {
-public:
-  std::vector<KeyEvent> update(const std::array<bool, 256> &current_states);
+  public:
+    std::vector<KeyEvent> update(const std::array<bool, 256> &current_states);
 
-private:
-  std::array<bool, 256> electrode_states{};
+  private:
+    std::array<bool, 256> electrode_states{}; // initialized to 0
 };
 
 #endif

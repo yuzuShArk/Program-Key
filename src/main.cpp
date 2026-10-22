@@ -1,25 +1,29 @@
 #include "keyboard.hpp"
 
+#include <array>
 #include <iostream>
 
 int main() {
-  Keyboard keyboard;
+    Keyboard keyboard;
+    std::array<bool, 256> states{};
 
-  const auto print_events = [](const auto &events) {
-    for (const auto &event : events) {
-      if (event.type == KeyEventType::KeyDown) {
-        std::cout << "KeyDown!" << std::endl;
-      } else {
-        std::cout << "KeyUp" << std::endl;
-      }
-    }
-  };
+    // first time: not pressed
+    auto events = keyboard.update(states);
+    std::cout << "after first update: " << events.size() << std::endl;
 
-  print_events(keyboard.update(0, false)); // let go
-  print_events(keyboard.update(0, true));  // touched
-  print_events(keyboard.update(0, true));  // keep touching
-  print_events(keyboard.update(0, true));  // keep touching
-  print_events(keyboard.update(0, false)); // let go
+    // second time: press down elec 0->A
+    states[0] = true;
+    events = keyboard.update(states);
+    std::cout << "pressed A, event counter:" << events.size() << std::endl;
 
-  return 0;
+    // third time: keep pressing A
+    events = keyboard.update(states);
+    std::cout << "pressed A, event counter:" << events.size() << std::endl;
+
+    // fourth time: release A
+    states[0] = false;
+    events = keyboard.update(states);
+    std::cout << "pressed A, event counter:" << events.size() << std::endl;
+
+    return 0;
 }
