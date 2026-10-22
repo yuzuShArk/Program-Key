@@ -62,3 +62,9 @@ following steps:
 2. read old key state (KeyUp or KeyDown)
 3. compare old state and new state (change if new state and old state is different)
 4. update key state
+
+### 2026/10/22
+
+update() function now detects multiple electrodes at the same time.  
+  
+Start working at actually implementing c++ code to Pico MCU.
