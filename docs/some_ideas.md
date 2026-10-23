@@ -68,3 +68,9 @@ following steps:
 update() function now detects multiple electrodes at the same time.  
   
 Start working at actually implementing c++ code to Pico MCU.
+
+### 2026/10/23
+
+Successfully flashed firmware into Pico, but somehow clang has problem recognizing
+things like 'std' or "keyboard.hpp"... I make sure to check compile_commands.json
+though, but that didn't help. WHY?
