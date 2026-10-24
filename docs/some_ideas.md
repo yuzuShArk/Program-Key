@@ -71,6 +71,48 @@ Start working at actually implementing c++ code to Pico MCU.
 
 ### 2026/10/23
 
+#### Problem(1): Clang keeps prompting: "Warning: can't find `<cstdint`"
+
 Successfully flashed firmware into Pico, but somehow clang has problem recognizing
-things like 'std' or "keyboard.hpp"... I make sure to check compile_commands.json
+things like `'std'` or `"keyboard.hpp"`... I make sure to check `compile_commands.json`
 though, but that didn't help. WHY?
+
+### 2026/10/24
+
+Why does Clang keep telling me that it couldn't find `<cstdint>` but I can still
+COMPILE and the `.uf2` file WORKS?????  
+  
+UPDATE!!! Turns out that this is a classical `compiler & clang not in sync` problem
+In the root directory of the program, there is `./src/main.cpp ./src/keyboard.cpp
+./src/keymap.cpp` and their corresponding `include files`.  
+Originally, `g++` is used when compiling the code in `./src`. However, when compiling
+the code in `./firmware`, it uses a different compiler
+called `arm-none-eabi-g++`.  
+**Clang DOES NOT know where the "Header Search Path" of the ARM compiler is.**  
+Thus, when it comes to analyzing the code `./firmware/main.cpp`, it just simply
+prompts that it can't find things like `<cstdint>` or such.  
+
+#### Solution(1): Adjust nvim clang getting
+
+Just simply use `--query-driver` in nvim .config files: `clangd.lua`, this argument
+will allow clang to search the compiler so that it can acquire its
+**Header Search Path**.  
+The code is provided below:
+
+```lua
+return {
+  "neovim/nvim-lspconfig",
+  opts = {
+    servers = {
+      clangd = {
+        cmd = {
+          "clangd",
+          "--query-driver=/usr/sbin/arm-none-eabi-*",
+        },
+      },
+    },
+  },
+}
+```
+
+<p align="center">~~~ End of Solution ~~~</p>
