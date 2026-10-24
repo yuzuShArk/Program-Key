@@ -4,7 +4,7 @@
 #include "keymap.hpp"
 
 #include <array>
-#include <cstdint>
+// #include <cstdint>
 #include <vector>
 
 enum class KeyEventType { KeyDown, KeyUp };

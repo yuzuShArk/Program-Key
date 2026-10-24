@@ -15,13 +15,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 pico_sdk_init()
 
 add_executable(program_key_firmware
-    main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main.cpp
     ../src/keyboard.cpp
     ../src/keymap.cpp
 )
 
 target_include_directories (program_key_firmware PRIVATE
-    ../include/
+    ${CMAKE_CURRENT_LIST_DIR}/../include
+    ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
 target_link_libraries(program_key_firmware

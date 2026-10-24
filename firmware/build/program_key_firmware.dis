@@ -57,17 +57,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  26 .debug_rnglists 00006acf  00000000  00000000  000ed718  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 27 .debug_line   0003f67e  00000000  00000000  000f41e7  2**0
+ 27 .debug_line   0003f70b  00000000  00000000  000f41e7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 28 .debug_str    0001caa2  00000000  00000000  00133865  2**0
+ 28 .debug_str    0001caa2  00000000  00000000  001338f2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 29 .comment      0000003c  00000000  00000000  00150307  2**0
+ 29 .comment      0000003c  00000000  00000000  00150394  2**0
                   CONTENTS, READONLY
- 30 .ARM.attributes 0000002a  00000000  00000000  00150343  2**0
+ 30 .ARM.attributes 0000002a  00000000  00000000  001503d0  2**0
                   CONTENTS, READONLY
- 31 .debug_frame  00006a10  00000000  00000000  00150370  2**2
+ 31 .debug_frame  00006a10  00000000  00000000  001503fc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 32 .debug_line_str 000003b9  00000000  00000000  00156d80  2**0
+ 32 .debug_line_str 000003b9  00000000  00000000  00156e0c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 /home/riddlejoker/Program-Key/firmware/build/program_key_firmware.elf:     file format elf32-littlearm
