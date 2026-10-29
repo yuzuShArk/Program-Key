@@ -115,4 +115,14 @@ return {
 }
 ```
 
-<p align="center">~~~ End of Solution ~~~</p>
+` ~~~ End of Solution ~~~ `
+
+### 2026/10/30
+
+Been awhile since last update, too busy for things at school lol.  
+Anyways, today I tested the touch detection for MPR121, fortunately it ended up
+going well.
+The electrodes are good and sensitive, which is fantastic. Took a little bit of
+time to test the i2c connection though...(I guess it's the GND problem???, because
+once I change the GND from pin 8 to pin 28 then the code starts working, but it
+could be breadboard's problem).
