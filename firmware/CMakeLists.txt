@@ -14,11 +14,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 pico_sdk_init()
 
-add_executable(program_key_firmware
-    ${CMAKE_CURRENT_LIST_DIR}/main.cpp
-    ../src/keyboard.cpp
-    ../src/keymap.cpp
-)
+set(PROGRAM_KEY_TARGET "main" CACHE STRING "Firmware Target")
+set_property(CACHE PROGRAM_KEY_TARGET PROPERTY STRINGS main mpr121)
+
+if(PROGRAM_KEY_TARGET STREQUAL "main")
+    set(PROGRAM_KEY_SOURCES
+        main.cpp
+        ../src/keyboard.cpp
+        ../src/keymap.cpp
+    )
+elseif(PROGRAM_KEY_TARGET STREQUAL "mpr121")
+    set(PROGRAM_KEY_SOURCES
+        tests/test_mpr121.cpp
+    )
+else()
+    message(FATAL_ERROR "Unknown PROGRAM_KEY_TARGET")
+endif()
+
+add_executable(program_key_firmware ${PROGRAM_KEY_SOURCES})
 
 target_include_directories (program_key_firmware PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/../include
@@ -27,6 +40,7 @@ target_include_directories (program_key_firmware PRIVATE
 
 target_link_libraries(program_key_firmware
     pico_stdlib
+    hardware_i2c
 )
 
 pico_enable_stdio_usb(program_key_firmware 1)
