@@ -1,9 +1,13 @@
-
 #include "hardware/i2c.h"
+#include "keyboard.hpp"
+#include "keymap.hpp"
 #include "pico/stdlib.h"
 
+#include <array>
 #include <cstdint>
 #include <cstdio>
+#include <pico/time.h>
+#include <vector>
 
 // MPR121 I2C address
 constexpr uint8_t MPR121_ADDR = 0x5A;
@@ -88,12 +92,31 @@ bool init_mpr121() {
     return write_register(ELECTRODE_CONFIG, 0x8C);
 }
 
+const char *keycode_name(KeyCode key) {
+    switch (key) {
+    case KeyCode::A:
+        return "A";
+    case KeyCode::B:
+        return "B";
+    case KeyCode::C:
+        return "C";
+    case KeyCode::D:
+        return "D";
+    case KeyCode::Enter:
+        return "Enter";
+    case KeyCode::Space:
+        return "Space";
+    case KeyCode::Escape:
+        return "Escape";
+    }
+    return "Unknown";
+}
+
 int main() {
     stdio_init_all();
     sleep_ms(3000);
 
     init_i2c();
-
     printf("MPR121 test started\n");
 
     if (!init_mpr121()) {
@@ -106,18 +129,35 @@ int main() {
 
     printf("MPR121 initialized successfully\n");
 
+    Keyboard keyboard;
+    std::array<bool, 256> states{};
+
     while (true) {
-        uint8_t touch_status[2] = {};
+        uint8_t touch_status[2]{};
 
-        if (read_registers(TOUCH_STATUS_L, touch_status, 2)) {
-            uint16_t touched = static_cast<uint16_t>(touch_status[0]) |
-                               (static_cast<uint16_t>(touch_status[1]) << 8);
-
-            printf("Touch status: 0x%04X\n", touched);
-        } else {
+        if (!read_registers(TOUCH_STATUS_L, touch_status, 2)) {
             printf("Touch status read failed\n");
+            sleep_ms(200);
+            continue;
         }
 
-        sleep_ms(200);
+        const uint16_t touched = static_cast<uint16_t>(touch_status[0]) |
+                                 (static_cast<uint16_t>(touch_status[1]) << 8);
+
+        // convert mpr121 bit status to electrode status
+        for (std::size_t i = 0; i < 12; i++) {
+            states[i] = (touched & (1u << i));
+        }
+
+        // only output events when state changes
+        const std::vector<KeyEvent> events = keyboard.update(states);
+        for (const auto &event : events) {
+            const char *type =
+                event.type == KeyEventType::KeyDown ? "KeyDown" : "KeyUp";
+
+            printf("%s: %s\n", type, keycode_name(event.key));
+        }
+
+        sleep_ms(50);
     }
 }

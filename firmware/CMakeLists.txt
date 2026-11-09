@@ -26,6 +26,8 @@ if(PROGRAM_KEY_TARGET STREQUAL "main")
 elseif(PROGRAM_KEY_TARGET STREQUAL "mpr121")
     set(PROGRAM_KEY_SOURCES
         tests/test_mpr121.cpp
+        ../src/keyboard.cpp
+        ../src/keymap.cpp
     )
 else()
     message(FATAL_ERROR "Unknown PROGRAM_KEY_TARGET")
